@@ -1,7 +1,5 @@
-package com.neoteric.hotel_review_service;
+package com.neoteric.hotel_review_service.review;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +7,7 @@ import java.util.Map;
 
 @Getter
 @Setter
-public class Review {
+public  class Review {
     private String id;
     private String title;
     private String text;
@@ -17,5 +15,5 @@ public class Review {
     private User user;
     private String trip_type;
     private String published_date;
-    private Map<String, ReviewSubRating> subratings;
+    private Map<String, SubRating> subratings;
 }

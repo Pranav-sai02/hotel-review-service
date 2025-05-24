@@ -1,4 +1,4 @@
-package com.neoteric.hotel_review_service;
+package com.neoteric.hotel_review_service.review;
 
 
 import lombok.Getter;
@@ -6,8 +6,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CategoryReview  {
+public  class ReviewSummary {
     private String type;
     private double averageRating;
     private String percentage;
+
+
 }

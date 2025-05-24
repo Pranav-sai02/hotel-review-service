@@ -1,4 +1,4 @@
-package com.neoteric.hotel_review_service;
+package com.neoteric.hotel_review_service.review;
 
 import jakarta.persistence.*;
 

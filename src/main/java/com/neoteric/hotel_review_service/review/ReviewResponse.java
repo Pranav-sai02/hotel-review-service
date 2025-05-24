@@ -1,7 +1,5 @@
-package com.neoteric.hotel_review_service;
+package com.neoteric.hotel_review_service.review;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 

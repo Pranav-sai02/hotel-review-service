@@ -1,4 +1,4 @@
-package com.neoteric.hotel_review_service.review;
+package com.neoteric.hotel_review_service.rating;
 
 
 import lombok.Getter;

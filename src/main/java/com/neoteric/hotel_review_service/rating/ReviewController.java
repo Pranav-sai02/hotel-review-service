@@ -1,6 +1,5 @@
-package com.neoteric.hotel_review_service.review;
+package com.neoteric.hotel_review_service.rating;
 
-import com.neoteric.hotel_review_service.rating.AverageRatingResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

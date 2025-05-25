@@ -1,4 +1,4 @@
-package com.neoteric.hotel_review_service.review;
+package com.neoteric.hotel_review_service.rating;
 
 import org.springframework.stereotype.Service;
 
@@ -38,22 +38,31 @@ public class ReviewService {
 
 
     public Map<String, Double> calculateAverageRatingByTripType(List<Map<String, Object>> reviews) {
-        // Group ratings by tripType and calculate average per tripType
-        Map<String, Double> avgByTripType = reviews.stream()
-                .filter(review -> review.get("rating") != null && review.get("tripType") != null)
+        return reviews.stream()
+                .filter(review -> review.get("tripType") != null)
                 .collect(Collectors.groupingBy(
                         review -> review.get("tripType").toString(),
-                        Collectors.averagingDouble(review -> {
-                            Object ratingObj = review.get("rating");
-                            try {
-                                return Double.parseDouble(ratingObj.toString());
-                            } catch (NumberFormatException e) {
-                                return 0.0;
-                            }
-                        })
+                        Collectors.collectingAndThen(
+                                Collectors.averagingDouble(review -> {
+                                    Object ratingObj = review.get("rating");
+                                    if (ratingObj instanceof Number) {
+                                        return ((Number) ratingObj).doubleValue();
+                                    } else if (review.containsKey("subratings")) {
+                                        Map<String, Map<String, Object>> subratings = (Map<String, Map<String, Object>>) review.get("subratings");
+                                        return subratings.values().stream()
+                                                .map(sr -> sr.get("value"))
+                                                .filter(val -> val instanceof Number)
+                                                .mapToDouble(val -> ((Number) val).doubleValue())
+                                                .average()
+                                                .orElse(0.0);
+                                    }
+                                    return 0.0;
+                                }),
+                                avg -> Math.round(avg * 100.0) / 100.0
+                        )
                 ));
-
-        return avgByTripType;
     }
+
+
 
 }
